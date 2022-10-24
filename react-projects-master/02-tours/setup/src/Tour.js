@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const Tour = ({ id, image, name, info, price, handleClick }) => {
+  const [readMore, setReadMore] = useState(false);
   console.log(handleClick);
   return (
     <article className="single-tour">
@@ -11,7 +12,17 @@ const Tour = ({ id, image, name, info, price, handleClick }) => {
           <h4 className="tour-price">{price}</h4>
         </div>
       </footer>
-      <p>{info}</p>
+      {readMore ? (
+        <p>
+          {info}...
+          <button onClick={() => setReadMore(false)}>Show Less</button>
+        </p>
+      ) : (
+        <p>
+          {info.slice(0, 150)}...{" "}
+          <button onClick={() => setReadMore(true)}>read more</button>
+        </p>
+      )}
       <button className="delete-btn" onClick={() => handleClick(id)}>
         Not Interseted
       </button>
